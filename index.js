@@ -105,19 +105,7 @@ function finalScore(inningcb, innings){
   }
 }
  
-// console.log(finalScore(inning, 1))
-console.log(finalScore(inning, 9));
-
-
-// function update() {
-  //     return {
-  //       "Home": inningcb +,
-  //       "Away": inningcb
-  //     }
-  // }
-
-
-
+//console.log(finalScore(inning, 9));
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -132,7 +120,7 @@ function getInningScore(inningcb) {
   }
 }
 
-//console.log(getInningScore(inning));
+console.log(getInningScore(inning));
 
 
 
@@ -140,11 +128,10 @@ function getInningScore(inningcb) {
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
-  1. Receive the callback function `getInningScore` from Task 4
-  2. Receive the callback function `inning` from Task 2
-  3. Receive a number of innings to be played
-  4. Return an array where each of it's index values equals a string stating the
-  Home and Away team's scores for each inning.  Not the cummulative score.
+  1. X Receive the callback function `getInningScore` from Task 4
+  2. X Receive the callback function `inning` from Task 2
+  3. X Receive a number of innings to be played
+  4. Return an array where each of it's index values equals a string stating the Home and Away team's scores for each inning.  Not the cummulative score.
   5. If there's a tie at the end of the innings, add this message containing the score to the end of the array:  "This game will require extra innings: Away 12 - Home 12"  (see tie example below)
      If there isn't a tie, add this message to the end of the array: "Final Score: Away 13 - Home 11"  (see no tie example below)
   
@@ -179,10 +166,25 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
-}
+function scoreboard(inningScoreCB, inningCB, numInnings) {
+  let homeScore = 0;
+  let awayScore = 0;
+  const scorebyInning = [];
 
+  for (let i = 0; i < numInnings; i++) {
+    const currentInning = inningScoreCB(inningCB);
+    homeScore = homeScore + currentInning.Home;
+    awayScore = awayScore + currentInning.Away;
+    scorebyInning.push(`Inning ${i + 1}: Away ${currentInning.Away} - Home ${currentInning.Home}`)
+  }
+  if(homeScore === awayScore) {
+    scorebyInning.push(`This game will require extra innings: Away ${currentInning.Away} - Home ${currentInning.Home}`)
+  }else {
+    scorebyInning.push(`Final Score: Away ${awayScore} - Home ${homeScore}`);
+  }
+  return scorebyInning;
+}
+console.log('task 4', scoreboard(getInningScore, inning, 9));
 
 
 
